@@ -8,9 +8,11 @@ import java.util.List;
  * Hello world!
  *
  */
-public class App 
+public class StringCalculator 
 {
-	int Add(String numbers) throws Exception {
+	static int count=0;
+	public int Add(String numbers) throws Exception {
+		count++;
 		int idx = numbers.indexOf("//");
 		HashSet<String> delimiter = new HashSet<>();
 		if(idx!=-1)
@@ -91,5 +93,8 @@ public class App
 		if(!del.equals(""))
 			set.add(del);
 		return s.substring(i+1, s.length());
+	}
+	public int GetCalledCount() {
+		return count;
 	}
 }

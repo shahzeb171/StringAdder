@@ -35,7 +35,7 @@ public class AppTest
      */
     public void testApp() throws Exception
     {
-    	App obj = new App();
+    	StringCalculator obj = new StringCalculator();
     	assertEquals(0, obj.Add(""));
     	assertEquals(1, obj.Add("1"));
     	assertEquals(3, obj.Add("1,2"));
@@ -49,5 +49,6 @@ public class AppTest
     	assertEquals(10, obj.Add("//[***]\n1\n2***3***4"));
     	assertEquals(15, obj.Add("//[*][%][+]\n1\n2*3%4+5"));
     	assertEquals(15, obj.Add("//[***][%][+]\n1\n2***3%4+5"));
+    	System.out.println(obj.GetCalledCount());
     }
 }

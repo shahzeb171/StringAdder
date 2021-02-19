@@ -1,6 +1,7 @@
 package com.shahzeb.StringAdder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -11,14 +12,13 @@ public class App
 {
 	int Add(String numbers) throws Exception {
 		int idx = numbers.indexOf("//");
-		String delimiters = ",";
-		if(idx!=-1) {
-			String a[] = getDelimiter(numbers);
-			numbers=a[0];
-			delimiters = new String(a[1]);
-		}
-		
-		List<String> str = mysplit(numbers,delimiters);
+		HashSet<String> delimiter = new HashSet<>();
+		if(idx!=-1)
+			numbers=getDelimiter(numbers,delimiter);
+		else
+			delimiter.add(",");
+		delimiter.add("\n");
+		List<String> str = mysplit(numbers,delimiter);
 		int sum=0;
 		String neg="";
 		for(String x : str) {
@@ -46,14 +46,14 @@ public class App
 		return s.substring(i).length()==0?"0":s.substring(i);
 	}
 	
-	List<String> mysplit(String s,String delimiter) {
+	List<String> mysplit(String s,HashSet<String> delim) {
 		List<String> list = new ArrayList<>();
 		String num="",delimit="";
 		char wordA[] = s.toCharArray();
 		for(int i=0;i<wordA.length;i++) {
 			if(wordA[i]>='0' && wordA[i]<='9' || wordA[i]=='-' ) {
 				if(delimit.length()!=0) {
-					if(delimit.equals(delimiter)||delimit.equals("\n")) {
+					if(delim.contains(delimit)) {
 						list.add(num);
 						num="";
 						delimit="";
@@ -71,18 +71,25 @@ public class App
 			list.add(num);
 		return list;
 	}
-	String[] getDelimiter(String s) {
+	String getDelimiter(String s,HashSet<String> set) {
 		char wordA[] = s.toCharArray();
 		int n = wordA.length,i=2;
-		String delim="";
+		String del="";
 		for(;i<n;i++) {
 			if(wordA[i]=='\n')
 					break;
-			delim+=wordA[i];
+			if(wordA[i]=='[' ) {
+				continue;
+			}
+			else if(wordA[i]==']') {
+				set.add(del);
+				del="";
+				continue;
+			}
+			del+=wordA[i];
 		}
-		String ar[] = new String[2];
-		ar[0]=s.substring(i+1, s.length());
-		ar[1] = delim;
-		return ar;
+		if(!del.equals(""))
+			set.add(del);
+		return s.substring(i+1, s.length());
 	}
 }

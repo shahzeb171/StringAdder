@@ -22,15 +22,30 @@ public class App
 		int sum=0;
 		String neg="";
 		for(String x : str) {
-			int val = Integer.parseInt(x);
+			int val = trimZ(x).length()>4?0:Integer.parseInt(x);
 			if(val<0)
 				neg+=String.valueOf(x)+" ";
+			if(val>1000)
+				val=0;
 			sum+=val;
 		}
 		if(neg.length()!=0)
 			throw new Exception("negatives not allowed "+neg);
 		return sum;
 	}
+	String trimZ(String s) {
+		int i=0;
+		for(char c : s.toCharArray()) {
+			if(c=='0') {
+				i++;
+				continue;
+			}
+			break;
+		}
+			
+		return s.substring(i).length()==0?"0":s.substring(i);
+	}
+	
 	List<String> mysplit(String s,String delimiter) {
 		List<String> list = new ArrayList<>();
 		String num="",delimit="";

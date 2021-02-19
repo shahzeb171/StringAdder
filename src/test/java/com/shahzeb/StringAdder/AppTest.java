@@ -42,7 +42,10 @@ public class AppTest
     	assertEquals(3, obj.Add("1\n2"));
     	assertEquals(10, obj.Add("1\n2,3,4"));
     	assertEquals(10, obj.Add("//;\n1\n2;3;4"));
-    	assertEquals(10, obj.Add("//;\n1\n2;3;-4"));
-    	assertEquals(10, obj.Add("//;\n-1\n2;-3;-4"));
+    	//assertEquals(10, obj.Add("//;\n1\n2;3;-4"));
+    	//assertEquals(10, obj.Add("//;\n-1\n2;-3;-4"));
+    	assertEquals(8, obj.Add("//;\n1\n1001;3;4"));
+    	assertEquals(8, obj.Add("//;\n1\n2001;3;4"));
+    	
     }
 }

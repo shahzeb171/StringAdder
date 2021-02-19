@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class App 
 {
-	int Add(String numbers) {
+	int Add(String numbers) throws Exception {
 		int idx = numbers.indexOf("//");
 		String delimiters = ",";
 		if(idx!=-1) {
@@ -17,15 +17,18 @@ public class App
 			numbers=a[0];
 			delimiters = new String(a[1]);
 		}
-			
-		
 		
 		List<String> str = mysplit(numbers,delimiters);
 		int sum=0;
+		String neg="";
 		for(String x : str) {
 			int val = Integer.parseInt(x);
+			if(val<0)
+				neg+=String.valueOf(x)+" ";
 			sum+=val;
 		}
+		if(neg.length()!=0)
+			throw new Exception("negatives not allowed "+neg);
 		return sum;
 	}
 	List<String> mysplit(String s,String delimiter) {

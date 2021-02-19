@@ -29,10 +29,11 @@ public class AppTest
     }
 
     /**
+     * @throws Exception 
      * Rigourous Test :-)
      * @throws  
      */
-    public void testApp()
+    public void testApp() throws Exception
     {
     	App obj = new App();
     	assertEquals(0, obj.Add(""));
@@ -41,5 +42,7 @@ public class AppTest
     	assertEquals(3, obj.Add("1\n2"));
     	assertEquals(10, obj.Add("1\n2,3,4"));
     	assertEquals(10, obj.Add("//;\n1\n2;3;4"));
+    	assertEquals(10, obj.Add("//;\n1\n2;3;-4"));
+    	assertEquals(10, obj.Add("//;\n-1\n2;-3;-4"));
     }
 }

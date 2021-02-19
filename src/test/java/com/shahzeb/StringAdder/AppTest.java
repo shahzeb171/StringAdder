@@ -39,5 +39,7 @@ public class AppTest
     	assertEquals(1, obj.Add("1"));
     	assertEquals(3, obj.Add("1,2"));
     	assertEquals(3, obj.Add("1\n2"));
+    	assertEquals(10, obj.Add("1\n2,3,4"));
+    	assertEquals(10, obj.Add("//;\n1\n2;3;4"));
     }
 }
